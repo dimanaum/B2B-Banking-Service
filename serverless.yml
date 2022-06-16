@@ -1,0 +1,83 @@
+org: dimanaum
+app: b2b-service-http-api
+service: b2b-service-http-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${sls:stage}
+  httpApi:
+    cors: true
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: "arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+functions:
+  create:
+    handler: b2b/create.create
+    events:
+      - httpApi:
+          path: /b2b
+          method: post
+
+  list:
+    handler: b2b/list.list
+    events:
+      - httpApi:
+          path: /b2b
+          method: get
+
+  get:
+    handler: b2b/get.get
+    events:
+      - httpApi:
+          path: /b2b/{account_type}
+          method: get
+
+  update:
+    handler: b2b/transfer.transfer
+    events:
+      - httpApi:
+          path: /b2b
+          method: put
+
+  delete:
+    handler: b2b/delete.delete
+    events:
+      - httpApi:
+          path: /b2b/{account_type}
+          method: delete
+
+resources:
+  Resources:
+    B2BDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+          -
+            AttributeName: account_type
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+          -
+            AttributeName: account_type
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
