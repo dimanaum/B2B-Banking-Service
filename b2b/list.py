@@ -8,7 +8,7 @@ from boto3.dynamodb.conditions import Attr
 dynamodb = boto3.resource('dynamodb')
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-admin_ids = ["944419139117"]  # todo: move out of source code
+admin_ids = ["XXXXXXXXXXXXXX"]  # todo: move out of source code
 
 
 def list(event, context):
