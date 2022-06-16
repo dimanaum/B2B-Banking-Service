@@ -4,7 +4,7 @@ This is a serverless HTTP API developed as a solution for the coding assignment 
 
 ## Structure
 
-This service has a separate directory for all the b2b operations. For each operation exactly one file exists e.g. `b2b/delete.py`. In each of these files there is exactly one function defined.
+This service has exactly one file for each function, e.g. `b2b/delete.py`. In each of these files, there is exactly one function defined. This does not include helper functions.
 
 ## Deploy
 
