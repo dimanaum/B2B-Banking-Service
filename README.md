@@ -1,6 +1,6 @@
 # Bank2Bank HTTP API
 
-This is a serverless HTTP API developed as a solution for the coding assignment provided by Vendia. This uses a modified Serverless Framework template.
+This is a serverless HTTP API developed as a solution for the coding assignment provided by Vendia. This uses a modified Serverless Framework template in combination with DynamoDB for data storage.
 
 ## Structure
 
