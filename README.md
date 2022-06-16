@@ -11,7 +11,7 @@ This service has a separate directory for all the b2b operations. For each opera
 In order to deploy the endpoint, run
 
 ```bash
-serverless deploy
+serverless
 ```
 
 ## Usage
