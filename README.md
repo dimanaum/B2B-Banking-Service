@@ -47,6 +47,7 @@ If an associated account type exists for the user, it will be returned in JSON f
 curl -X PUT https://XXXXXXX.execute-api.us-east-1.amazonaws.com/b2b --data '{"amount": 100, "src_account_type": "Checking", "dest_account": "XXXXXXXXXXXXX", "dest_account_type": "Savings"}' -H "Content-Type: application/json"
 ```
 A return message will indicate whether the transfer was successful or not. For a transfer to be successful, the sender account must have sufficient funds.
+NOTE: This command did require enabling the following permission in my lamdba function role to work: AmazonDynamoDBFullAccess
 
 ### Delete an account
 
